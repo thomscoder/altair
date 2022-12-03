@@ -4,7 +4,7 @@ import "altair/src/view"
 
 
 var articles = []view.Article{
-{Title: `docs`, Author: `Thomas`, Body: ``, Path: `docs`,}, {Title: `gcd`, Author: `Thomas`, Body: ``, Path: `docs/gcd`,}, {Title: `gcd.wat`, Author: `Thomas`, Body: `(module
+{Title: `docs`, Author: `Thomas`, Body: ``, Path: `docs`, IsDir: true}, {Title: `gcd`, Author: `Thomas`, Body: ``, Path: `docs/gcd`, IsDir: true}, {Title: `gcd.wat`, Author: `Thomas`, Body: `(module
   (func $gcd (param i32 i32) (result i32)
     (local i32)
     block  ;; label = @1
@@ -31,7 +31,7 @@ var articles = []view.Article{
   )
   (export "gcd" (func $gcd))
 )
-`, Path: `docs/gcd/gcd.wat`,}, {Title: `go`, Author: `Thomas`, Body: ``, Path: `docs/gcd/go`,}, {Title: `beast.wat`, Author: `Thomas`, Body: ``, Path: `docs/gcd/go/beast.wat`,}, {Title: `hello`, Author: `Thomas`, Body: ``, Path: `docs/hello`,}, {Title: `hello.wat`, Author: `Thomas`, Body: `;; An example of instantiating a small wasm module 
+`, Path: `docs/gcd/gcd.wat`, IsDir: false}, {Title: `hello`, Author: `Thomas`, Body: ``, Path: `docs/hello`, IsDir: true}, {Title: `hello.wat`, Author: `Thomas`, Body: `;; An example of instantiating a small wasm module 
 ;; which imports functionality from the host, 
 ;; then calling into wasm which calls back into the host.
 
@@ -40,4 +40,4 @@ var articles = []view.Article{
     (func (export "run")
     (call $hello)
     )
-)`, Path: `docs/hello/hello.wat`,}, }
+)`, Path: `docs/hello/hello.wat`, IsDir: false}, }

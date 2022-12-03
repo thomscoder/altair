@@ -19,23 +19,17 @@ func main() {
 
 func getAltairFiles(contentDir string, out *os.File) {
 
-	files := map[string]fs.DirEntry{}
-
 	filepath.WalkDir(contentDir, func(path string, file fs.DirEntry, e error) error {
 		if file.Name() != ".git" {
 			if e != nil {
 				return e
 			}
-			files[path] = file
+			body, _ := os.ReadFile(path)
+			stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t}, ", file.Name(), "Thomas", string(body), path, file.IsDir())
+			out.Write([]byte(stringified))
 		}
 
 		return nil
 	})
 
-	for path, file := range files {
-
-		body, _ := os.ReadFile(path)
-		stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`,}, ", file.Name(), "Thomas", string(body), path)
-		out.Write([]byte(stringified))
-	}
 }

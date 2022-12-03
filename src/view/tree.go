@@ -17,13 +17,12 @@ func add(target *tview.TreeNode, path string, articles []Article) {
 	// checks if there's a article whose Path ends with the current path
 	for _, article := range articles {
 		if strings.HasSuffix(article.Path, fmt.Sprintf("%s/%s", path, article.Title)) {
-			isDir := article.Body == ""
 
 			node := tview.NewTreeNode(article.Title).
 				SetReference(filepath.Join(path, article.Title)).
 				SetSelectable(true)
 
-			if isDir {
+			if article.IsDir {
 				node.SetColor(tcell.ColorGreen)
 			}
 

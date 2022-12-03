@@ -14,6 +14,7 @@ type Article struct {
 	Author string
 	Body   string
 	Path   string
+	IsDir  bool
 }
 
 var Articles = make([]Article, 0)

@@ -1,8 +1,6 @@
 package main
 
-import (
-	"altair/src/build"
-)
+import "altair/src/build"
 
 //go:generate go run script/getFiles.go
 

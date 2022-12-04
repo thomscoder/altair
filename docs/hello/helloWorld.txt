@@ -1,0 +1,7 @@
+A simple Hello world program in WASM
+
+-
+hello.wat
+-
+
+that will print "hello world" in the console

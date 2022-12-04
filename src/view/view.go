@@ -1,6 +1,7 @@
 package view
 
 import (
+	"altair/src/graphics"
 	"fmt"
 
 	"github.com/gdamore/tcell/v2"
@@ -10,15 +11,16 @@ import (
 var pagesArr = []*tview.Pages{}
 
 type Article struct {
-	Title  string
-	Author string
-	Body   string
-	Path   string
-	IsDir  bool
+	Title   string
+	Author  string
+	Body    string
+	Path    string
+	Snippet string
+	IsDir   bool
 }
 
 var Articles = make([]Article, 0)
-var Root = tview.NewTreeNode("Get Started 😂")
+var Root = tview.NewTreeNode(fmt.Sprintf("%s Get Started", graphics.Emoji["books"]))
 
 // Tview
 var pages = tview.NewPages()
@@ -27,8 +29,8 @@ var placeholder = tview.NewTextView()
 var app = tview.NewApplication()
 var sitePages = tview.NewList().ShowSecondaryText(false)
 var tree = tview.NewTreeView().SetGraphics(false).SetTopLevel(0).SetPrefixes([]string{
-	"[red]* ",
-	"[white]- ",
+	"",
+	fmt.Sprintf("%s ", graphics.Emoji["pointer"]),
 	"[darkmagenta]- ",
 }).SetRoot(Root).SetCurrentNode(Root)
 
@@ -36,16 +38,6 @@ var flex = tview.NewFlex()
 var text = tview.NewTextView().
 	SetTextColor(tcell.ColorOrangeRed).
 	SetText("(t) to change theme | (q) to quit")
-
-// File content
-func setConcatText(article *Article) {
-	articleText.Clear()
-	text := "Content: \n%s"
-	placeholder.SetText(article.Body)
-	placeholder.SetBackgroundColor(tcell.ColorNavajoWhite)
-
-	articleText.SetText(fmt.Sprintf(text, placeholder.GetText(false))).ScrollToBeginning()
-}
 
 // Create the view
 func Create() {

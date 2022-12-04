@@ -4,7 +4,39 @@ import "altair/src/view"
 
 
 var articles = []view.Article{
-{Title: `docs`, Author: `Thomas`, Body: ``, Path: `docs`, IsDir: true}, {Title: `gcd`, Author: `Thomas`, Body: ``, Path: `docs/gcd`, IsDir: true}, {Title: `gcd.wat`, Author: `Thomas`, Body: `(module
+{Title: `docs`, Author: `Thomas ✌️`, Body: ``, Path: `docs`, IsDir: true}, {Title: `gcd`, Author: `Thomas ✌️`, Body: ``, Path: `docs/gcd`, IsDir: true}, {Title: `example.txt`, Author: `Thomas ✌️`, Body: `Hello from the example
+This example takes the gcd.wat script
+
+(module
+  (func  (param i32 i32) (result i32)
+    (local i32)
+    block  ;; label = @1
+      block  ;; label = @2
+        local.get 0
+        br_if 0 (;@2;)
+        local.get 1
+        local.set 2
+        br 1 (;@1;)
+      end
+      loop  ;; label = @2
+        local.get 1
+        local.get 0
+        local.tee 2
+        i32.rem_u
+        local.set 0
+        local.get 2
+        local.set 1
+        local.get 0
+        br_if 0 (;@2;)
+      end
+    end
+    local.get 2
+  )
+  (export "gcd" (func ))
+)
+
+
+and runs it`, Path: `docs/gcd/example.txt`, IsDir: false, Snippet: `(module
   (func $gcd (param i32 i32) (result i32)
     (local i32)
     block  ;; label = @1
@@ -31,7 +63,20 @@ var articles = []view.Article{
   )
   (export "gcd" (func $gcd))
 )
-`, Path: `docs/gcd/gcd.wat`, IsDir: false}, {Title: `hello`, Author: `Thomas`, Body: ``, Path: `docs/hello`, IsDir: true}, {Title: `hello.wat`, Author: `Thomas`, Body: `;; An example of instantiating a small wasm module 
+`}, {Title: `hello`, Author: `Thomas ✌️`, Body: ``, Path: `docs/hello`, IsDir: true}, {Title: `helloWorld.txt`, Author: `Thomas ✌️`, Body: `A simple Hello world program in WASM
+
+;; An example of instantiating a small wasm module 
+;; which imports functionality from the host, 
+;; then calling into wasm which calls back into the host.
+
+(module
+    (import "" "hello" (func ))
+    (func (export "run")
+    (call )
+    )
+)
+
+that will print "hello world" in the console`, Path: `docs/hello/helloWorld.txt`, IsDir: false, Snippet: `;; An example of instantiating a small wasm module 
 ;; which imports functionality from the host, 
 ;; then calling into wasm which calls back into the host.
 
@@ -40,4 +85,4 @@ var articles = []view.Article{
     (func (export "run")
     (call $hello)
     )
-)`, Path: `docs/hello/hello.wat`, IsDir: false}, }
+)`}, }

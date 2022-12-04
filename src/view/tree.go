@@ -2,7 +2,6 @@ package view
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 	"strings"
 
@@ -23,7 +22,9 @@ func add(target *tview.TreeNode, path string, articles []Article) {
 				SetSelectable(true)
 
 			if article.IsDir {
-				node.SetColor(tcell.ColorGreen)
+				node.SetColor(tcell.Color120)
+			} else {
+				node.SetColor(tcell.ColorLightBlue)
 			}
 
 			target.AddChild(node)
@@ -46,11 +47,12 @@ func TreeMaker(root *tview.TreeNode, rootDir string, articles []Article) {
 		children := node.GetChildren()
 		path := reference.(string)
 		if len(children) == 0 {
-			if fileInfo, _ := os.Stat(path); fileInfo.IsDir() {
-				add(node, path, articles)
-			} else {
-				for _, article := range Articles {
-					if article.Path == path {
+			for _, article := range Articles {
+				// Read the path from the article Path
+				if article.Path == path {
+					if article.IsDir {
+						add(node, path, articles)
+					} else {
 						setConcatText(&article)
 						run(path, &article)
 					}
@@ -60,6 +62,7 @@ func TreeMaker(root *tview.TreeNode, rootDir string, articles []Article) {
 		} else {
 			// Collapse if visible, expand if collapsed.
 			node.SetExpanded(!node.IsExpanded())
+
 		}
 	})
 

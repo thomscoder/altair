@@ -5,6 +5,8 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
+	"strings"
 )
 
 // to include files at build time
@@ -25,8 +27,25 @@ func getAltairFiles(contentDir string, out *os.File) {
 				return e
 			}
 			body, _ := os.ReadFile(path)
-			stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t}, ", file.Name(), "Thomas", string(body), path, file.IsDir())
-			out.Write([]byte(stringified))
+
+			if file.IsDir() {
+				stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t}, ", file.Name(), "Thomas \u270C\uFE0F", string(body), path, file.IsDir())
+				out.Write([]byte(stringified))
+			}
+
+			if filepath.Ext(path) == ".txt" {
+				rxp := regexp.MustCompile("-([^-]+)\\S+")
+				match := rxp.FindStringSubmatch(string(body))
+				fileToGetContentFrom := strings.TrimSpace(match[len(match)-1])
+
+				pathOfFileToGetContentFrom := filepath.Join(filepath.Dir(path), fileToGetContentFrom)
+				newContent, _ := os.ReadFile(pathOfFileToGetContentFrom)
+				newBody := rxp.ReplaceAllString(string(body), string(newContent))
+
+				stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t, Snippet: `%s`}, ", file.Name(), "Thomas \u270C\uFE0F", string(newBody), path, file.IsDir(), string(newContent))
+				out.Write([]byte(stringified))
+			}
+
 		}
 
 		return nil

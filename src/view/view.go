@@ -46,8 +46,9 @@ func Create() {
 			AddItem(tree, 0, 1, true).
 			AddItem(articleText, 0, 4, false), 0, 6, false).
 		AddItem(tview.NewFlex().
-			AddItem(text, 0, 4, false).
-			AddItem(playButton, 0, 1, false), 1, 1, false)
+			AddItem(text, 0, 10, false).
+			AddItem(lightThemeButton, 0, 1, false).
+			AddItem(darkThemeButton, 0, 1, false), 1, 6, false)
 
 	// Creates events
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
@@ -64,10 +65,9 @@ func Create() {
 	})
 
 	pages.AddPage("Menu", flex, true, true)
-	pages.AddPage("Change theme", createThemePicker(), true, false)
 
 	// Set dark theme as default
-	setDarkTheme()
+	setLightTheme()
 
 	if err := app.SetRoot(pages, true).SetFocus(tree).EnableMouse(true).Run(); err != nil {
 		panic(err)

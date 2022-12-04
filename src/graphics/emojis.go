@@ -28,4 +28,6 @@ var Emoji = map[string]string{
 	"books": "\U0001f4da",
 
 	"pointer": "\U0001f449",
+	"sun":     "\u2600\uFE0F",
+	"moon":    "\U0001f319",
 }

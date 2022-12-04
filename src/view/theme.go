@@ -1,38 +1,23 @@
 package view
 
 import (
+	"altair/src/graphics"
+
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
-var modal = tview.NewModal().
-	SetText("Choose theme").
-	SetTextColor(tcell.ColorBlack).
-	AddButtons([]string{"Dark", "Light"})
+var lightThemeButton = tview.NewButton(graphics.Emoji["sun"]).
+	SetSelectedFunc(func() {
+		setLightTheme()
+	}).
+	SetBackgroundColorActivated(tcell.ColorBlack)
 
-func createThemePicker() *tview.Pages {
-
-	modal.SetDoneFunc(func(buttonIndex int, buttonLabel string) {
-		switch buttonLabel {
-		case "Light":
-			setLightTheme()
-			pages.SwitchToPage("Menu")
-
-			break
-
-		default:
-			setDarkTheme()
-			pages.SwitchToPage("Menu")
-			break
-
-		}
-	})
-
-	themePage := tview.NewPages().
-		AddPage("modal", modal, true, true)
-
-	return themePage
-}
+var darkThemeButton = tview.NewButton(graphics.Emoji["moon"]).
+	SetSelectedFunc(func() {
+		setDarkTheme()
+	}).
+	SetBackgroundColorActivated(tcell.ColorBlack)
 
 func setLightTheme() {
 	tree.SetBackgroundColor(tcell.ColorGhostWhite)
@@ -44,13 +29,9 @@ func setLightTheme() {
 	text.SetTextColor(tcell.ColorBlack)
 
 	articleText.SetBorderPadding(1, 2, 1, 2)
-	articleText.SetBackgroundColor(tcell.ColorFloralWhite)
+	articleText.SetBackgroundColor(tcell.ColorPapayaWhip)
 	articleText.SetTextColor(tcell.ColorBlack)
-
-	modal.SetBackgroundColor(tcell.ColorNavajoWhite)
-	modal.SetTextColor(tcell.ColorBlack)
-
-	return
+	darkThemeButton.SetBackgroundColor(tcell.Color101)
 }
 
 func setDarkTheme() {
@@ -63,8 +44,4 @@ func setDarkTheme() {
 	articleText.SetBorder(true)
 
 	text.SetBackgroundColor(tcell.ColorBlack)
-
-	modal.SetBackgroundColor(tcell.ColorNavajoWhite)
-
-	return
 }

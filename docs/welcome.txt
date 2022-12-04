@@ -1,1 +1,5 @@
-[red]A portable WebAssembly guide
+[red]Welcome on Altair ⭐
+
+Generate portable terminal based documentation.
+
+Please refer to the README for more information

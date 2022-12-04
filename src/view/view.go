@@ -9,7 +9,7 @@ import (
 )
 
 var Articles = make([]Article, 0)
-var Root = tview.NewTreeNode(fmt.Sprintf("%s Get Started", graphics.Emoji["books"]))
+var Root = tview.NewTreeNode(fmt.Sprintf("%s Get Started ", graphics.Emoji["books"]))
 
 // Tview
 var pages = tview.NewPages()

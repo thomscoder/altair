@@ -1,12 +1,12 @@
-A simple Hello world program in WASM
+You can write normal text like this
 
-An example of instantiating a small wasm module which imports functionality from the host, 
-then calling into wasm which calls back into the host.
+Colored text like [blue]this[white]
 
+You can import scripts like this:
 [orange]
 -
 hello.wat
 -
 [white]
 
-This prints "hello world" in the console
+(this is limited to one external script per page for now)

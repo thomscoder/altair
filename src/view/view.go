@@ -13,15 +13,22 @@ var Root = tview.NewTreeNode(fmt.Sprintf("%s Get Started", graphics.Emoji["books
 
 // Tview
 var pages = tview.NewPages()
-var articleText = tview.NewTextView()
+var articleText = tview.NewTextView().
+	SetDynamicColors(true).
+	SetDynamicColors(true).
+	SetRegions(true).
+	SetChangedFunc(func() {
+		app.Draw()
+	})
+
 var placeholder = tview.NewTextView()
 var app = tview.NewApplication()
 var sitePages = tview.NewList().ShowSecondaryText(false)
-var tree = tview.NewTreeView().SetGraphics(false).SetTopLevel(0).SetPrefixes([]string{
-	"",
-	fmt.Sprintf("%s ", graphics.Emoji["pointer"]),
-	"[darkmagenta]- ",
-}).SetRoot(Root).SetCurrentNode(Root)
+var tree = tview.NewTreeView().
+	SetGraphics(false).
+	SetTopLevel(0).
+	SetRoot(Root).
+	SetCurrentNode(Root)
 
 var flex = tview.NewFlex()
 var text = tview.NewTextView().

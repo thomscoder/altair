@@ -7,6 +7,7 @@ var articles = []view.Article{
 {Title: `docs`, Author: `Thomas ✌️`, Body: ``, Path: `docs`, IsDir: true}, {Title: `gcd`, Author: `Thomas ✌️`, Body: ``, Path: `docs/gcd`, IsDir: true}, {Title: `example.txt`, Author: `Thomas ✌️`, Body: `Hello from the example
 This example takes the gcd.wat script
 
+[orange]
 (module
   (func $gcd (param i32 i32) (result i32)
     (local i32)
@@ -34,7 +35,7 @@ This example takes the gcd.wat script
   )
   (export "gcd" (func $gcd))
 )
-
+[white]
 
 and runs it`, Path: `docs/gcd/example.txt`, IsDir: false, Snippet: `(module
   (func $gcd (param i32 i32) (result i32)
@@ -62,27 +63,23 @@ and runs it`, Path: `docs/gcd/example.txt`, IsDir: false, Snippet: `(module
     local.get 2
   )
   (export "gcd" (func $gcd))
-)
-`}, {Title: `hello`, Author: `Thomas ✌️`, Body: ``, Path: `docs/hello`, IsDir: true}, {Title: `helloWorld.txt`, Author: `Thomas ✌️`, Body: `A simple Hello world program in WASM
+)`}, {Title: `hello`, Author: `Thomas ✌️`, Body: ``, Path: `docs/hello`, IsDir: true}, {Title: `helloWorld.txt`, Author: `Thomas ✌️`, Body: `A simple Hello world program in WASM
 
-;; An example of instantiating a small wasm module 
-;; which imports functionality from the host, 
-;; then calling into wasm which calls back into the host.
+An example of instantiating a small wasm module which imports functionality from the host, 
+then calling into wasm which calls back into the host.
 
+[orange]
 (module
     (import "" "hello" (func $hello))
     (func (export "run")
     (call $hello)
     )
 )
+[white]
 
-that will print "hello world" in the console`, Path: `docs/hello/helloWorld.txt`, IsDir: false, Snippet: `;; An example of instantiating a small wasm module 
-;; which imports functionality from the host, 
-;; then calling into wasm which calls back into the host.
-
-(module
+This prints "hello world" in the console`, Path: `docs/hello/helloWorld.txt`, IsDir: false, Snippet: `(module
     (import "" "hello" (func $hello))
     (func (export "run")
     (call $hello)
     )
-)`}, {Title: `welcome.txt`, Author: `Thomas ✌️`, Body: `A portable WebAssembly guide`, Path: `docs/welcome.txt`, IsDir: false,}, }
+)`}, {Title: `welcome.txt`, Author: `Thomas ✌️`, Body: `[red]A portable WebAssembly guide`, Path: `docs/welcome.txt`, IsDir: false,}, }

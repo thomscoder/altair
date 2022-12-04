@@ -1,1 +1,1 @@
-A portable WebAssembly guide
+[red]A portable WebAssembly guide

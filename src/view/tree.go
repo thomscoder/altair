@@ -1,6 +1,7 @@
 package view
 
 import (
+	"altair/src/graphics"
 	"fmt"
 	"path/filepath"
 	"strings"
@@ -16,12 +17,17 @@ func add(target *tview.TreeNode, path string, articles []Article) {
 	// checks if there's a article whose Path ends with the current path
 	for _, article := range articles {
 		if strings.HasSuffix(article.Path, fmt.Sprintf("%s/%s", path, article.Title)) {
+			textInTree := article.Title
+			isArticleDir := article.IsDir // check if it's a directory
 
-			node := tview.NewTreeNode(article.Title).
+			if isArticleDir {
+				textInTree = fmt.Sprintf("%s %s", graphics.Emoji["pointer"], textInTree)
+			}
+			node := tview.NewTreeNode(textInTree).
 				SetReference(filepath.Join(path, article.Title)).
 				SetSelectable(true)
 
-			if article.IsDir {
+			if isArticleDir {
 				node.SetColor(tcell.Color120)
 			} else {
 				node.SetColor(tcell.ColorLightBlue)
@@ -54,7 +60,6 @@ func TreeMaker(root *tview.TreeNode, rootDir string, articles []Article) {
 						add(node, path, articles)
 					} else {
 						setConcatText(&article)
-						run(path, &article)
 					}
 				}
 			}

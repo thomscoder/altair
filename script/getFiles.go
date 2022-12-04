@@ -1,6 +1,7 @@
 package main
 
 import (
+	"altair/src/texts"
 	"fmt"
 	"io/fs"
 	"os"
@@ -15,7 +16,7 @@ import (
 func main() {
 	out, _ := os.Create("src/build/docs.go")
 	out.Write([]byte("package build\n\nimport \"altair/src/view\"\n\n\nvar articles = []view.Article{\n"))
-	getAltairFiles("docs", out)
+	getAltairFiles(texts.MainDirectoryOfDocs, out)
 	out.Write([]byte("}\n"))
 }
 

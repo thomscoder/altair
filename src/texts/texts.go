@@ -1,5 +1,6 @@
 package texts
 
 const (
-	Ext = ".txt"
+	Ext                 = ".txt"
+	MainDirectoryOfDocs = "docs"
 )

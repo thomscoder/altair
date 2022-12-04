@@ -1,7 +1,12 @@
 A simple Hello world program in WASM
 
+An example of instantiating a small wasm module which imports functionality from the host, 
+then calling into wasm which calls back into the host.
+
+[orange]
 -
 hello.wat
 -
+[white]
 
-that will print "hello world" in the console
+This prints "hello world" in the console

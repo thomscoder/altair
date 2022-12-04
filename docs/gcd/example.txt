@@ -1,8 +1,10 @@
 Hello from the example
 This example takes the gcd.wat script
 
+[orange]
 -
 gcd.wat
 -
+[white]
 
 and runs it

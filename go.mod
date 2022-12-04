@@ -3,7 +3,6 @@ module altair
 go 1.19
 
 require (
-	github.com/bytecodealliance/wasmtime-go/v3 v3.0.2
 	github.com/gdamore/tcell/v2 v2.4.1-0.20210905002822-f057f0a857a1
 	github.com/rivo/tview v0.0.0-20221128165837-db36428c92d9
 )

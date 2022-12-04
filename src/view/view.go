@@ -8,17 +8,6 @@ import (
 	"github.com/rivo/tview"
 )
 
-var pagesArr = []*tview.Pages{}
-
-type Article struct {
-	Title   string
-	Author  string
-	Body    string
-	Path    string
-	Snippet string
-	IsDir   bool
-}
-
 var Articles = make([]Article, 0)
 var Root = tview.NewTreeNode(fmt.Sprintf("%s Get Started", graphics.Emoji["books"]))
 
@@ -44,7 +33,7 @@ func Create() {
 	sitePages.SetSelectedFunc(func(index int, name string, second_name string, shortcut rune) {
 		setConcatText(&Articles[index])
 	})
-
+	// Creates flexbox
 	flex.SetDirection(tview.FlexRow).
 		AddItem(tview.NewFlex().
 			AddItem(tree, 0, 1, true).
@@ -53,6 +42,7 @@ func Create() {
 			AddItem(text, 0, 4, false).
 			AddItem(playButton, 0, 1, false), 1, 1, false)
 
+	// Creates events
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		switch event.Rune() {
 		case rune('q'):
@@ -69,6 +59,7 @@ func Create() {
 	pages.AddPage("Menu", flex, true, true)
 	pages.AddPage("Change theme", createThemePicker(), true, false)
 
+	// Set dark theme as default
 	setDarkTheme()
 
 	if err := app.SetRoot(pages, true).SetFocus(tree).EnableMouse(true).Run(); err != nil {

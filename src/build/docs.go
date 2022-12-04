@@ -8,7 +8,7 @@ var articles = []view.Article{
 This example takes the gcd.wat script
 
 (module
-  (func  (param i32 i32) (result i32)
+  (func $gcd (param i32 i32) (result i32)
     (local i32)
     block  ;; label = @1
       block  ;; label = @2
@@ -32,7 +32,7 @@ This example takes the gcd.wat script
     end
     local.get 2
   )
-  (export "gcd" (func ))
+  (export "gcd" (func $gcd))
 )
 
 
@@ -70,9 +70,9 @@ and runs it`, Path: `docs/gcd/example.txt`, IsDir: false, Snippet: `(module
 ;; then calling into wasm which calls back into the host.
 
 (module
-    (import "" "hello" (func ))
+    (import "" "hello" (func $hello))
     (func (export "run")
-    (call )
+    (call $hello)
     )
 )
 
@@ -85,4 +85,4 @@ that will print "hello world" in the console`, Path: `docs/hello/helloWorld.txt`
     (func (export "run")
     (call $hello)
     )
-)`}, }
+)`}, {Title: `welcome.txt`, Author: `Thomas ✌️`, Body: `A portable WebAssembly guide`, Path: `docs/welcome.txt`, IsDir: false,}, }

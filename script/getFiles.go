@@ -36,14 +36,19 @@ func getAltairFiles(contentDir string, out *os.File) {
 			if filepath.Ext(path) == ".txt" {
 				rxp := regexp.MustCompile("-([^-]+)\\S+")
 				match := rxp.FindStringSubmatch(string(body))
-				fileToGetContentFrom := strings.TrimSpace(match[len(match)-1])
+				if len(match) > 0 {
+					fileToGetContentFrom := strings.TrimSpace(match[len(match)-1])
 
-				pathOfFileToGetContentFrom := filepath.Join(filepath.Dir(path), fileToGetContentFrom)
-				newContent, _ := os.ReadFile(pathOfFileToGetContentFrom)
-				newBody := rxp.ReplaceAllString(string(body), string(newContent))
+					pathOfFileToGetContentFrom := filepath.Join(filepath.Dir(path), fileToGetContentFrom)
+					newContent, _ := os.ReadFile(pathOfFileToGetContentFrom)
+					newBody := rxp.ReplaceAllLiteral(body, newContent)
 
-				stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t, Snippet: `%s`}, ", file.Name(), "Thomas \u270C\uFE0F", string(newBody), path, file.IsDir(), string(newContent))
-				out.Write([]byte(stringified))
+					stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t, Snippet: `%s`}, ", file.Name(), "Thomas \u270C\uFE0F", string(newBody), path, file.IsDir(), string(newContent))
+					out.Write([]byte(stringified))
+				} else {
+					stringified := fmt.Sprintf("{Title: `%s`, Author: `%s`, Body: `%s`, Path: `%s`, IsDir: %t,}, ", file.Name(), "Thomas \u270C\uFE0F", string(body), path, file.IsDir())
+					out.Write([]byte(stringified))
+				}
 			}
 
 		}

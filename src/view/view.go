@@ -33,7 +33,7 @@ var tree = tview.NewTreeView().
 var flex = tview.NewFlex()
 var text = tview.NewTextView().
 	SetTextColor(tcell.ColorOrangeRed).
-	SetText("(t) to change theme | (q) to quit")
+	SetText("(q) to quit")
 
 // Create the view
 func Create() {
